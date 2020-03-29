@@ -22,7 +22,8 @@ for get_commits_info in all_forked_repo:
 	forked_repo = git_url+get_commits_info
 	response_from_forked_repo = requests.get(forked_repo)
 	soup = BeautifulSoup(response_from_forked_repo.text, "lxml")
-	for read_commit_message in soup.select('div.branch-infobar'):
+	print(soup)
+	for read_commit_message in soup.select('div.d-flex.flex-auto'):
 		commit_message = read_commit_message.text
 		if "ahead" in commit_message:
-			print "Repo Name is: " +forked_repo+commit_message.splitlines()[12]
+			print ("Repo Name is: " + forked_repo + " - " + commit_message.strip())
